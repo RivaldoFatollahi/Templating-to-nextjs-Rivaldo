@@ -14,7 +14,7 @@ export function Card({ className, ...props }: React.HTMLAttributes<HTMLDivElemen
 // Bagian header
 export function CardHeader({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={cn("p-4 border-b", className)} {...props} />
+    <div className={cn("p-4 border-b border-[#fff]", className)} {...props} />
   )
 }
 
