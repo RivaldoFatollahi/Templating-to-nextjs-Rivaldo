@@ -25,7 +25,7 @@ const barData = [
 
 export default function Page() {
   return (
-    <div className="flex min-h-screen bg-[#0f172a] text-white rounded-xl">
+    <div className="flex-1 p-6 bg-base text-base transition-colors duration-300">
       <div className="flex-1 flex flex-col p-6 space-y-6">
 
         {/* Welcome Banner */}

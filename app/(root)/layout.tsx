@@ -8,6 +8,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const [sidebarOpen, setSidebarOpen] = useState(true)
   const [navigation, setNavigation] = useState<"sidebar" | "navbar">("sidebar")
 
+  // ✅ Sync navigation dari localStorage
   useEffect(() => {
     const nav = (localStorage.getItem("navigation") as "sidebar" | "navbar") || "sidebar"
     setNavigation(nav)
@@ -21,9 +22,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return () => window.removeEventListener("navigation-change", handler)
   }, [])
 
+  // ✅ Sync theme + theme color
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme") || "dark"
+    const savedColor = localStorage.getItem("theme-color") || "#3b82f6"
+
+    document.documentElement.classList.toggle("dark", savedTheme === "dark")
+    document.documentElement.style.setProperty("--color-primary", savedColor)
+  }, [])
+
   return (
-    <div className="flex h-screen bg-[#0f172a] text-white overflow-hidden">
-      {/* ✅ Kalau Sidebar Mode */}
+    <div className="flex h-screen bg-base text-base overflow-hidden transition-colors duration-300">
+      {/* ✅ Sidebar Mode */}
       {navigation === "sidebar" && (
         <div
           className={`w-64 transition-all duration-300 ease-in-out ${
@@ -38,14 +48,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <div className="flex-1 flex flex-col transition-all duration-300 ease-in-out">
         <Navbar toggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
 
-        {/* ✅ Kalau Navbar Mode → tampilkan Sidebar sebagai secondary navbar */}
+        {/* ✅ Navbar Mode → Sidebar tampil horizontal */}
         {navigation === "navbar" && (
-          <div className="bg-[#1e293b] border-b border-gray-700 px-4">
+          <div className="bg-card border-b border-base px-4">
             <Sidebar horizontal />
           </div>
         )}
 
-        <main className="flex-1 p-6 overflow-y-auto">{children}</main>
+        <main className="flex-1 overflow-y-auto">{children}</main>
       </div>
     </div>
   )

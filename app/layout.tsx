@@ -1,7 +1,7 @@
 import "./globals.css"
 
 export const metadata = {
-  title: "My App",
+  title: "Templating",
   description: "Demo Switcher Layout",
 }
 
