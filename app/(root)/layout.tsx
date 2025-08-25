@@ -22,14 +22,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return () => window.removeEventListener("navigation-change", handler)
   }, [])
 
-  // ✅ Sync theme + theme color
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") || "dark"
-    const savedColor = localStorage.getItem("theme-color") || "#3b82f6"
+// ✅ Sync theme (tanpa custom color)
+useEffect(() => {
+  const savedTheme = localStorage.getItem("theme") || "light"
+  document.documentElement.classList.toggle("dark", savedTheme === "dark")
 
-    document.documentElement.classList.toggle("dark", savedTheme === "dark")
-    document.documentElement.style.setProperty("--color-primary", savedColor)
-  }, [])
+   localStorage.removeItem("theme-color")
+  document.documentElement.style.removeProperty("--color-primary")
+}, [])
+
 
   return (
     <div className="flex h-screen bg-base text-base overflow-hidden transition-colors duration-300">

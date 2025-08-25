@@ -36,11 +36,6 @@ export default function Switcher({
     document.documentElement.setAttribute("dir", savedDir)
 
     // ✅ restore semua var
-    const keys = ["--color-primary", "--color-menu", "--color-header", "--color-bg"]
-    keys.forEach((k) => {
-      const val = localStorage.getItem(k)
-      if (val) document.documentElement.style.setProperty(k, val)
-    })
   }, [open])
 
   // ✅ Theme Mode
@@ -142,41 +137,6 @@ export default function Switcher({
               <div className="flex gap-3">
                 <SwitcherButton label="Sidebar" active={navigation === "sidebar"} onClick={() => handleNavigation("sidebar")} />
                 <SwitcherButton label="Navbar" active={navigation === "navbar"} onClick={() => handleNavigation("navbar")} />
-              </div>
-            </Section>
-
-            {/* ✅ Extra Color Settings */}
-            <Section title="More Colors">
-              <div className="space-y-4">
-                <div>
-                  <p className="text-xs text-muted mb-1">Menu Colors:</p>
-                  <div className="flex gap-2 flex-wrap">
-                    <ColorButton color="#1e293b" onClick={() => setThemeVar("--color-menu", "#1e293b")} />
-                    <ColorButton color="#111827" onClick={() => setThemeVar("--color-menu", "#111827")} />
-                    <ColorButton color="#22c55e" onClick={() => setThemeVar("--color-menu", "#22c55e")} />
-                    <ColorButton color="#f97316" onClick={() => setThemeVar("--color-menu", "#f97316")} />
-                  </div>
-                </div>
-
-                <div>
-                  <p className="text-xs text-muted mb-1">Header Colors:</p>
-                  <div className="flex gap-2 flex-wrap">
-                    <ColorButton color="#ffffff" onClick={() => setThemeVar("--color-header", "#ffffff")} />
-                    <ColorButton color="#0f172a" onClick={() => setThemeVar("--color-header", "#0f172a")} />
-                    <ColorButton color="#3b82f6" onClick={() => setThemeVar("--color-header", "#3b82f6")} />
-                    <ColorButton color="#f59e0b" onClick={() => setThemeVar("--color-header", "#f59e0b")} />
-                  </div>
-                </div>
-
-                <div>
-                  <p className="text-xs text-muted mb-1">Background:</p>
-                  <div className="flex gap-2 flex-wrap">
-                    <ColorButton color="#f8fafc" onClick={() => setThemeVar("--color-bg", "#f8fafc")} />
-                    <ColorButton color="#0f172a" onClick={() => setThemeVar("--color-bg", "#0f172a")} />
-                    <ColorButton color="#1e293b" onClick={() => setThemeVar("--color-bg", "#1e293b")} />
-                    <ColorButton color="#047857" onClick={() => setThemeVar("--color-bg", "#047857")} />
-                  </div>
-                </div>
               </div>
             </Section>
 
